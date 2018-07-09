@@ -14,6 +14,7 @@ public interface MenuItem extends Listener {
 	public enum MenuItemType {
 		
 		CUSTOM("custom"),
+		COSMETICS("cosmetics"),
 		NAVIGATOR("navigator");
 		
 		private String name;

@@ -36,7 +36,7 @@ public class MenuManager implements Listener {
 	 * Sets Inventory for the Player
 	 */
 	@EventHandler
-	public void onPlayerLogin(PlayerJoinEvent event) {
+	public void onPlayerJoin(PlayerJoinEvent event) {
 		Player p = event.getPlayer();
 		addMenu(p);
 	}

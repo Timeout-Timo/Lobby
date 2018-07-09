@@ -35,7 +35,7 @@ public class Custom implements MenuItem {
 
 	@Override
 	public ItemStack getItemStack() {
-		return null;
+		return item;
 	}
 
 	@Override
@@ -43,11 +43,7 @@ public class Custom implements MenuItem {
 		return MenuItemType.CUSTOM;
 	}
 
-	public ItemStack getItem() {
-		return item;
-	}
-
-	public void setItem(ItemStack item) {
+	public void setItemStack(ItemStack item) {
 		this.item = item;
 	}
 	

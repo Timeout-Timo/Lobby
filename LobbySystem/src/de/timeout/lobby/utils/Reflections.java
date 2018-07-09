@@ -39,6 +39,16 @@ public class Reflections {
 		return null;
 	}
 	
+	public static <T> Field getField(Class<?> target, String name, Class<T> fieldtype) {
+		for(Field field : target.getDeclaredFields()) {
+			if((name == null || field.getName().equals(name)) && fieldtype.isAssignableFrom(field.getType())) {
+				field.setAccessible(true);
+				return field;
+			}
+		}
+		return null;
+	}
+	
 	public static Object getValue(Field field, Object obj) {
 		try {
 			field.setAccessible(true);

@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
+import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
@@ -15,6 +16,8 @@ import de.timeout.lobby.menu.MenuItem.MenuItemType;
 import de.timeout.lobby.menu.items.Custom;
 import de.timeout.lobby.menu.items.Navigator;
 import de.timeout.lobby.utils.ItemStackAPI;
+import de.timeout.lobby.utils.Reflections;
+import de.timeout.lobby.utils.Skull;
 import de.timeout.lobby.utils.UTFConfig;
 import net.md_5.bungee.api.ChatColor;
 
@@ -45,17 +48,21 @@ public class Menu {
 				ConfigurationSection item = section.getConfigurationSection(String.valueOf(i));
 				String perm = item.getString("required");
 				
-				if(perm == null || ((perm != null || perm != "") && player.hasPermission(perm))) {
-					MenuItemType type = MenuItemType.getMenuItemType(item.getString("type"));
-					String name = ChatColor.translateAlternateColorCodes('&', item.getString("displayname"));
-					Material mat = Material.valueOf(item.getString("material"));
-					short subid = (short) (item.getInt("subid") != 0 ? item.getInt("subid") : 0);
-					
-					ItemStack menuitem = ItemStackAPI.createItemStack(mat, subid, 1, name);
-					if(type == MenuItemType.NAVIGATOR) {
-						Navigator navi = new Navigator(menuitem);
-						contents.put(i, navi);
-					} else contents.put(i, new Custom(menuitem));
+				if(perm == null || (perm != null || perm != "")) {
+					if(player == null || (player != null || player.hasPermission(perm))) {
+						MenuItemType type = MenuItemType.getMenuItemType(item.getString("type"));
+						String name = ChatColor.translateAlternateColorCodes('&', item.getString("displayname"));
+						Material mat = Material.valueOf(item.getString("material"));
+						short subid = (short) (item.getInt("subid") != 0 ? item.getInt("subid") : 0);
+						
+						ItemStack menuitem = (mat == Material.SKULL_ITEM && subid == 3) ? Skull.getSkull(Reflections.getGameProfile(player), name) : ItemStackAPI.createItemStack(mat, subid, 1, name);
+						if(type == MenuItemType.NAVIGATOR) {
+							Navigator navi = player != null ? new Navigator(menuitem, player) : Navigator.getNavigatorManager();
+							contents.put(i, navi);
+						} else if(type == MenuItemType.COSMETICS) {
+							
+						} else contents.put(i, new Custom(menuitem));
+					}
 				}
 			}
 		}
@@ -103,5 +110,6 @@ public class Menu {
 	
 	public void unregisterListeners() {
 		contents.keySet().forEach(i -> PlayerInteractEvent.getHandlerList().unregister(contents.get(i)));
+		contents.keySet().forEach(i -> InventoryClickEvent.getHandlerList().unregister(contents.get(i)));
 	}
 }

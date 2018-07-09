@@ -16,6 +16,8 @@ import de.timeout.lobby.Lobby;
 import de.timeout.lobby.menu.MenuGUIItem;
 import de.timeout.lobby.menu.events.NavigatorActivateEvent;
 import de.timeout.lobby.utils.ItemStackAPI;
+import de.timeout.lobby.utils.Reflections;
+import de.timeout.lobby.utils.Skull;
 import de.timeout.lobby.utils.Sounds;
 import de.timeout.lobby.utils.UTFConfig;
 import net.md_5.bungee.api.ChatColor;
@@ -28,11 +30,13 @@ public class Navigator implements MenuGUIItem {
 	private static final String MATERIAL = "material";
 	
 	private ItemStack item;
+	private Player player;
 	private int lines;
 	private String name;
 	
-	public Navigator(ItemStack item) {
+	public Navigator(ItemStack item, Player player) {
 		this.item = item;
+		this.player = player;
 		this.lines = ConfigManager.getNavigator().getInt("settings.size");
 		this.name = ChatColor.translateAlternateColorCodes('&', ConfigManager.getNavigator().getString(NAME_CONST));
 		Bukkit.getServer().getPluginManager().registerEvents(this, main);
@@ -54,7 +58,7 @@ public class Navigator implements MenuGUIItem {
 	public void onActivate(PlayerInteractEvent event) {
 		Player p = event.getPlayer();
 		if(event.getItem() != null) {
-			if(this.item.isSimilar(event.getItem())) {
+			if(this.item.isSimilar(event.getItem()) && this.player == p && !event.isCancelled()) {
 				NavigatorActivateEvent e = new NavigatorActivateEvent(p, this);
 				Bukkit.getPluginManager().callEvent(e);
 				if(!e.isCancelled()) {
@@ -120,7 +124,7 @@ public class Navigator implements MenuGUIItem {
 			int amount = itemraw.getInt(AMOUNT);
 			short subid = (short) itemraw.getInt("subid");
 				
-			ItemStack item = ItemStackAPI.createItemStack(mat, subid, amount, name);
+			ItemStack item = (mat == Material.SKULL_ITEM && subid == 3) ? Skull.getSkull(Reflections.getGameProfile(player), name) : ItemStackAPI.createItemStack(mat, subid, amount, name);
 			inv.setItem(i, item);
 		}
 		
@@ -203,5 +207,9 @@ public class Navigator implements MenuGUIItem {
 	@Override
 	public MenuItemType getType() {
 		return MenuItemType.NAVIGATOR;
+	}
+
+	public void setItemStack(ItemStack item) {
+		this.item = item;
 	}
 }
