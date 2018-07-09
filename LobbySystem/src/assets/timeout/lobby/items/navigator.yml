@@ -1,0 +1,17 @@
+# Navigator-Configuration File for LobbySystem 0.1-DEV
+# Author: Timeout
+
+settings:
+  # Amount of Lines in Inventory
+  size: 5
+  # Name of Inventory
+  name: '&9Navigator'
+  
+inventory:
+  n:
+    name: '&8'
+    material: 'STAINED_GLASS_PANE'
+    amount: 1
+    subid: 7
+    
+navigation:

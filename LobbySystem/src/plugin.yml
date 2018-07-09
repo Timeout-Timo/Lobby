@@ -1,0 +1,20 @@
+name: LobbySystem
+version: 1.0
+author: Timeout
+description: A configureable LobbySystem
+
+main: de.timeout.lobby.Lobby
+
+commands:
+  setspawn:
+    description: Sets the Spawn in your Lobby
+  navigator:
+    description: Customize your navigator
+  setup:
+    description: Activates Setupmode
+    
+permissions:
+  lobby.setspawn:
+    description: Required for /setspawn
+  lobby.setup:
+    description: Required to setup the plugin

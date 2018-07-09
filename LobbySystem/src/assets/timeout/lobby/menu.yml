@@ -1,0 +1,16 @@
+# Menu Configuration for LobbySystem 0.1-DEV
+# Author: Timeout
+
+# The Menu of the players
+menu:
+  '4':
+    # Required Permission to get this Item
+    required: 'null'
+    # Type of MenuItem (navigator = Navigator, custom = external Plugin) 
+    type: 'navigator'
+    # Displayname of Item
+    displayname: '&9Navigator'
+    # Material of Item
+    material: 'COMPASS'
+    # SubID of Item (0 if not exists)
+    subid: 0

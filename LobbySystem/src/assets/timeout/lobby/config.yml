@@ -1,0 +1,30 @@
+# Configurationfile for LobbySystem version 0.1-DEV
+# Author: Timeout
+
+# The Language of the plugin
+language: 'de_DE'
+
+# The Spawnlocation of the Server
+spawn:
+  worldname: 'world'
+  x: 0.0
+  y: 65.0
+  z: 0.0
+  yaw: 0.0
+  pitch: 0.0
+  
+# Teleports to Spawn om Join
+jointeleport: true
+
+# Chat activated
+chat: true
+
+# Allow daylightCircle
+daylightCircle: false
+
+# Weather settings
+weather:
+  # Allow changing weather
+  change: false
+  # Default Weather (CLEAR = Sunny, RAINING = Rain / Snow, THUNDER = Storm);
+  default: 'CLEAR'

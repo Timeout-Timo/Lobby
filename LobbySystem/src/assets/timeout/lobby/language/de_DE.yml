@@ -1,0 +1,27 @@
+# Deutsche Sprachdatei für das LobbySystem 0.1-DEV
+# Autor: Timeout
+
+# Das hier ist die autogenerierte deutsche Sprachdatei. Hier werden Outputmessages gespeichert.
+
+# Der Prefix des Plugins
+prefix: '&8[&2LobbySystem&8] '
+
+setspawn:
+  sucess: '&7Der &fSpawnpoint &7wurde auf die Koordinaten &2X: &a[x]&7, &2Y: &a[y]&7, &2Z: &a[z] &7in der Welt &c[world] &agesetzt&7.'
+
+setup:
+  activate: '&7Der &6Setupmode &7wurde &aaktiviert&7.'
+  deactivate: '&7Der &6Setupmode &7wurde &cdeaktiviert&7.'
+
+util:
+  # Wenn ein Spieler keine Permissions hat
+  permissions: '&cDu hast nicht die benötigte Berechtigung, diesen Befehl auszuführen.'
+  # Wenn ein Spieler die Parameter falsch schreibt
+  falseCommand: '&7Meintest du &avielleicht&8:&6 [command]'
+  
+  gui:
+    navigator:
+      save:
+        title: '&9Navigator&7-&5Menu &aabspeichern&7?'
+        yes: '&aJa, meine aktuellen Einstellungen speichern&7.'
+        no: '&cNein, meine Änderungen verwerfen&7.'
